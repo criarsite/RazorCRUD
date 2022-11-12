@@ -16338,6 +16338,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Dev\\CrudRazor\\RazorCRUD\\Pages\\Produtos\\Editar.cshtml",
+      "TargetPath": "Pages\\Produtos\\Editar.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Dev\\CrudRazor\\RazorCRUD\\Pages\\Error.cshtml",
       "TargetPath": "Pages\\Error.cshtml",
       "FileKind": "mvc"

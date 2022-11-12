@@ -20,21 +20,26 @@ namespace RazorCRUD.Pages.Produtos
         }
         [BindProperty]
         public Produto Producto { get; set; }
+
+[TempData]
+public string Mensagem {get; set;}
+
         public void OnGet()
         {
         }
 
         public async Task<IActionResult> OnPost()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-            return Page();
+                return Page();
             }
 
             Producto.DataCadastro = DateTime.Now;
             _db.Add(Producto);
             await _db.SaveChangesAsync();
-return RedirectToPage("Index");
+            Mensagem = "Produto criado com sucesso";
+            return RedirectToPage("Index");
 
         }
     }

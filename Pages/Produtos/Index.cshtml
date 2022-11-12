@@ -6,6 +6,14 @@
 
 <h1>@ViewData["Title"]</h1>
 
+@if (Model.Mensagem != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+ @Model.Mensagem
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
 <div class="card">
     <div class="card-header bg-dark">
         <div class="row">
@@ -22,44 +30,48 @@
     </div>
 
     <div class="card-body">
-        @if (Model.Productos.Count() > 0)
-        {
-            <br />
-            <table class="table table-striped border">
-                <tr class="tabe-secondary">
-                    <th>@Html.DisplayNameFor(m => m.Productos.First().Id)</th>
-                    <th>@Html.DisplayNameFor(m => m.Productos.First().Nome)</th>
-                    <th>@Html.DisplayNameFor(m => m.Productos.First().Descricao)</th>
-                    <th>@Html.DisplayNameFor(m => m.Productos.First().Estoque)</th>
-                    <th>@Html.DisplayNameFor(m => m.Productos.First().Preco)</th>
-                    <th>@Html.DisplayNameFor(m => m.Productos.First().DataCadastro)</th>
-                    <th>Ações</th>
-                </tr>
-                @foreach (var item in Model.Productos)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(m => item.Id)</td>
-                        <td>@Html.DisplayFor(m => item.Nome)</td>
-                        <td>@Html.DisplayFor(m => item.Descricao)</td>
-                        <td>@Html.DisplayFor(m => item.Estoque)</td>
-                        <td>@Html.DisplayFor(m => item.Preco)</td>
-                        <td>@Html.DisplayFor(m => item.DataCadastro)</td>
-                        <td>
-                            <a asp-route-id="@item.Id" asp-page="Editar" class="btn btn-sucess btn-sm">Editar</a>
-                            <button asp-page-handler="Excluir" asp-route-id="@item.Id" onclick="return confirm(' Confirmar a  exclusão')" class="btn btn-danger btn-sm">Excluir</button>
-                        </td>
+
+        <form method="post">
+
+            @if (Model.Productos.Count() > 0)
+            {
+                <br />
+                <table class="table table-striped border">
+                    <tr class="tabe-secondary">
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Id)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Nome)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Descricao)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Estoque)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Preco)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().DataCadastro)</th>
+                        <th>Ações</th>
                     </tr>
-                }
-            </table>
+                    @foreach (var item in Model.Productos)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.Id)</td>
+                            <td>@Html.DisplayFor(m => item.Nome)</td>
+                            <td>@Html.DisplayFor(m => item.Descricao)</td>
+                            <td>@Html.DisplayFor(m => item.Estoque)</td>
+                            <td>@Html.DisplayFor(m => item.Preco)</td>
+                            <td>@Html.DisplayFor(m => item.DataCadastro)</td>
+                            <td>
+                                <a asp-route-id="@item.Id" asp-page="Editar" class="btn btn-warning btn-sm">Editar</a>
+                                <button asp-page-handler="Excluir" asp-route-id="@item.Id"
+                            onclick="return confirm(' Confirmar a  exclusão')"
+                            class="btn btn-danger btn-sm">Excluir</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
 
 
-        }
-        else
-        {
+            }
+            else
+            {
 
-            <p> Lista de produtos vazia</p>
-        }
-
+                <p> Lista de produtos vazia</p>
+            }
+        </form>
     </div>
-
 </div>

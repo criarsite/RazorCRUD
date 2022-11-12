@@ -22,9 +22,26 @@ namespace RazorCRUD.Pages.Produtos
 
     public IEnumerable<Produto> Productos {get; set;}
 
+[TempData]
+public string Mensagem {get; set;}
         public async Task OnGet()
         {
         Productos = await _db.Produtos.ToListAsync();
+
+        }
+
+        public async Task<IActionResult> OnPostExcluir(int id)
+        {
+            var produto = await _db.Produtos.FindAsync(id);
+            if(produto == null)
+            {
+                return NotFound();
+            }
+
+            _db.Produtos.Remove(produto);
+            await _db.SaveChangesAsync();
+             Mensagem = "Produto excluido com sucesso";
+            return RedirectToPage("Index");
 
         }
     }
